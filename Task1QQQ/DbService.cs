@@ -7,65 +7,79 @@ namespace Task1QQQ
     {
         private string connectionString = "server=localhost;user=root;database=mydb;port=3506;password=12345678";
 
-        public List<Substance> GetSubstances(
-         string name = null,
-         int? density = null,
-         int? calorificValue = null,
-         int? minConcentration = null,
-         int? maxConcentration = null,
-         int? substanceTypeId = null)
+        public List<Substance> FindSubstances(string name = null, decimal? minDensity = null, decimal? maxDensity = null,
+                                           decimal? minCalorificValue = null, decimal? maxCalorificValue = null,
+                                           int? substanceTypeId = null, bool density = false, bool calorific = false)
         {
             List<Substance> substances = new List<Substance>();
 
             using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
                 conn.Open();
+                MySqlCommand cmd = conn.CreateCommand();
 
-                string query = "SELECT * FROM Substance WHERE 1=1";
 
-                if (name != null)
-                    query += " AND name LIKE @name";
-                if (density.HasValue)
-                    query += " AND density = @density";
-                if (calorificValue.HasValue)
-                    query += " AND calorific_value = @calorificValue";
-                if (minConcentration.HasValue)
-                    query += " AND min_concentration = @minConcentration";
-                if (maxConcentration.HasValue)
-                    query += " AND max_concentration = @maxConcentration";
-                if (substanceTypeId.HasValue)
-                    query += " AND Substance_type_id_Substance_type = @substanceTypeId";
+                List<string> conditions = new List<string>();
 
-                using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                if (!string.IsNullOrEmpty(name))
+                    conditions.Add("s.name LIKE @name");
+                if (minDensity.HasValue && minDensity != 0 && density)
+                    conditions.Add("s.density >= @minDensity");
+                if (maxDensity.HasValue && maxDensity != 0 && density)
+                    conditions.Add("s.density <= @maxDensity");
+                if (minCalorificValue.HasValue && minCalorificValue != 0 && calorific)
+                    conditions.Add("s.calorific_value >= @minCalorificValue");
+                if (maxCalorificValue.HasValue && maxCalorificValue != 0 && calorific)
+                    conditions.Add("s.calorific_value <= @maxCalorificValue");
+                if (substanceTypeId.HasValue && substanceTypeId != 0)
+                    conditions.Add("s.Substance_type_id = @substanceTypeId");
+
+                string query = @"SELECT s.id_Substance, s.name, s.density, s.calorific_value, s.min_concentration, s.max_concentration, 
+                                    st.id_Substance_type, st.s_t_name
+                             FROM Substance s
+                             JOIN Substance_type st ON s.Substance_type_id = st.id_Substance_type";
+
+                if (conditions.Count > 0)
+                    query += " WHERE " + string.Join(" AND ", conditions);
+
+                cmd.CommandText = query;
+
+                if (!string.IsNullOrEmpty(name))
+                    cmd.Parameters.AddWithValue("@name", $"%{name}%");
+                if (minDensity.HasValue && minDensity != 0 && density)
+                    cmd.Parameters.AddWithValue("@minDensity", minDensity);
+                if (maxDensity.HasValue && maxDensity != 0 && density)
+                    cmd.Parameters.AddWithValue("@maxDensity", maxDensity);
+                if (minCalorificValue.HasValue && minCalorificValue != 0 && calorific)
+                    cmd.Parameters.AddWithValue("@minCalorificValue", minCalorificValue);
+                if (maxCalorificValue.HasValue && maxCalorificValue != 0 && calorific)
+                    cmd.Parameters.AddWithValue("@maxCalorificValue", maxCalorificValue);
+                if (substanceTypeId.HasValue && substanceTypeId != 0)
+                    cmd.Parameters.AddWithValue("@substanceTypeId", substanceTypeId);
+
+
+                using (MySqlDataReader reader = cmd.ExecuteReader())
                 {
-                    if (name != null)
-                        cmd.Parameters.AddWithValue("@name", "%" + name + "%");
-                    if (density.HasValue)
-                        cmd.Parameters.AddWithValue("@density", density);
-                    if (calorificValue.HasValue)
-                        cmd.Parameters.AddWithValue("@calorificValue", calorificValue);
-                    if (minConcentration.HasValue)
-                        cmd.Parameters.AddWithValue("@minConcentration", minConcentration);
-                    if (maxConcentration.HasValue)
-                        cmd.Parameters.AddWithValue("@maxConcentration", maxConcentration);
-                    if (substanceTypeId.HasValue)
-                        cmd.Parameters.AddWithValue("@substanceTypeId", substanceTypeId);
-
-                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    while (reader.Read())
                     {
-                        while (reader.Read())
+
+                        SubstanceType substanceType = new SubstanceType
                         {
-                            substances.Add(new Substance
-                            {
-                                Id = reader.GetInt32("id_Substance"),
-                                Name = reader.GetString("name"),
-                                Density = reader.GetInt32("density"),
-                                CalorificValue = reader.GetInt32("calorific_value"),
-                                MinConcentration = reader.GetInt32("min_concentration"),
-                                MaxConcentration = reader.GetInt32("max_concentration"),
-                                SubstanceTypeId = reader.GetInt32("Substance_type_id_Substance_type")
-                            });
-                        }
+                            Id = reader.GetInt32("id_Substance_type"),
+                            Name = reader.GetString("s_t_name")
+                        };
+
+
+                        substances.Add(new Substance
+                        {
+                            Id = reader.GetInt32("id_Substance"),
+                            Name = reader.GetString("name"),
+                            Density = reader.GetDecimal("density"),
+                            CalorificValue = reader.GetDecimal("calorific_value"),
+                            MinConcentration = reader.GetInt32("min_concentration"),
+                            MaxConcentration = reader.GetInt32("max_concentration"),
+                            SubstanceType = substanceType
+                        });
                     }
                 }
             }
@@ -103,13 +117,13 @@ namespace Task1QQQ
         }
 
 
-        public bool AddSubstance(string name, int density, int calorificValue, int minConcentration, int maxConcentration, int substanceTypeId)
+        public bool AddSubstance(string name, double density, double calorificValue, int minConcentration, int maxConcentration, int substanceTypeId)
         {
             using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
                 conn.Open();
 
-                string query = @"INSERT INTO Substance (name, density, calorific_value, min_concentration, max_concentration, Substance_type_id_Substance_type)
+                string query = @"INSERT INTO Substance (name, density, calorific_value, min_concentration, max_concentration, Substance_type_id)
                              VALUES (@name, @density, @calorificValue, @minConcentration, @maxConcentration, @substanceTypeId)";
 
                 using (MySqlCommand cmd = new MySqlCommand(query, conn))

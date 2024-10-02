@@ -4,18 +4,18 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Task1QQQ.Views"
-           xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        ResizeMode="NoResize" 
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        ResizeMode="NoResize"
         mc:Ignorable="d"
-        Title="AddSubstanceWindow" Height="510" Width="305">
+        Title="AddSubstanceWindow" Height="560" Width="315">
     <Grid>
-        <StackPanel Orientation="Vertical">
+        <StackPanel Margin="3" Orientation="Vertical">
             <TextBox
              MinWidth="100"
              materialDesign:HintAssist.Hint="Название"
              Style="{StaticResource MaterialDesignOutlinedTextBox}"
              HorizontalContentAlignment="Center"
-             Margin="8"
+             Margin="10"
              VerticalAlignment="Center"
              VerticalContentAlignment="Center"
              Text="{Binding Name}" />
@@ -24,63 +24,68 @@
              materialDesign:HintAssist.Hint="Плотность"
              Style="{StaticResource MaterialDesignOutlinedTextBox}"
              HorizontalContentAlignment="Center"
-             Margin="8"
+             Margin="10"
              VerticalAlignment="Center"
              VerticalContentAlignment="Center"
-             Text="{Binding Name}" />
+             Text="{Binding Destiny}" />
             <TextBox
              MinWidth="100"
              materialDesign:HintAssist.Hint="Теплота сгорания"
              Style="{StaticResource MaterialDesignOutlinedTextBox}"
              HorizontalContentAlignment="Center"
-             Margin="8"
+             Margin="10"
              VerticalAlignment="Center"
              VerticalContentAlignment="Center"
-             Text="{Binding Name}" />
+             Text="{Binding CalorificValue}" />
             <TextBox
               MinWidth="100"
               materialDesign:HintAssist.Hint="Минимальная допустимая концетрация"
               Style="{StaticResource MaterialDesignOutlinedTextBox}"
               HorizontalContentAlignment="Center"
-              Margin="8"
+              Margin="10"
               VerticalAlignment="Center"
               VerticalContentAlignment="Center"
-              Text="{Binding Name}" />
+              Text="{Binding MinConcetration}" />
             <TextBox
                MinWidth="100"
                materialDesign:HintAssist.Hint="Максимально допустимая концетрация"
                Style="{StaticResource MaterialDesignOutlinedTextBox}"
                HorizontalContentAlignment="Center"
-               Margin="8"
+               Margin="10"
                VerticalAlignment="Center"
                VerticalContentAlignment="Center"
-               Text="{Binding Name}" />
-            <StackPanel Margin="8" Orientation="Horizontal">
-                <ComboBox 
-                    Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                     SelectedIndex="0"
-                     materialDesign:HintAssist.Hint="Семейство"
-                     materialDesign:HintAssist.IsFloating="True"
-                     FontSize="20" Width="220" 
-                     ItemsSource="{Binding Familyes}"
-                     SelectedItem="{Binding SnakeForSearch.Family}" />
-                <Button
-                 Command="{Binding AddSubstanceTypeCommand}"
-                 Margin="10"
-                 VerticalAlignment="Center"
-                 HorizontalAlignment="Center"       
-                 Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
-                 ToolTip="MaterialDesignFloatingActionMiniLightButton">
-                    <materialDesign:PackIcon
-                     Width="30"
-                     Height="30"
-                     Kind="Plus" />
-                </Button>
+               Text="{Binding MaxConcetration}" />
+            <Grid >
+                <StackPanel  Margin="8"  Orientation="Horizontal">
+                    <ComboBox 
+                        x:Name="MyComboBox"
+                        Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                         SelectedIndex="0"
+                         materialDesign:HintAssist.Hint="Тип"
+                         materialDesign:HintAssist.IsFloating="True"
+                         FontSize="20" Width="220" 
+                         ItemsSource="{Binding SubstanceTypes, UpdateSourceTrigger=PropertyChanged}"
+                         SelectedItem="{Binding SelectedSubstanceType}" />
+                    <Button
+                     Margin="10,0,0,0"
+                     Command="{Binding AddSubstanceTypeCommand}"
+  
+                     VerticalAlignment="Center"
+                     HorizontalAlignment="Center"       
+                     Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                     ToolTip="MaterialDesignFloatingActionMiniLightButton">
+                        <materialDesign:PackIcon
+                         Width="30"
+                         Height="30"
+                         Kind="Plus" />
+                    </Button>
 
-            </StackPanel>
+                </StackPanel>
+
+            </Grid>
             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                <Button Height="50" Width="120" Margin="10" Content="Отмена" Style="{StaticResource MaterialDesignFlatDarkBgButton}"></Button>
-                <Button Height="50" Width="120" Margin="10" Content="Добавить" Style="{StaticResource MaterialDesignFlatLightBgButton}"></Button>
+                <Button Command="{Binding CancelCommand}" Height="50" Width="120" Margin="10" Content="Отмена" Style="{StaticResource MaterialDesignFlatDarkBgButton}"></Button>
+                <Button Command="{Binding AddSubstanceCommand}" Height="50" Width="120" Margin="10" Content="Добавить" Style="{StaticResource MaterialDesignFlatLightBgButton}"></Button>
             </StackPanel>
         </StackPanel>
     </Grid>

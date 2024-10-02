@@ -6,122 +6,224 @@
         xmlns:local="clr-namespace:Task1QQQ"
            xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        WindowState="Maximized"
+        Title="MainWindow" Height="1080" Width="1920">
     <Grid>
-        <StackPanel Orientation="Horizontal">
+        <Viewbox Stretch="Uniform"  HorizontalAlignment="Left" VerticalAlignment="Top" >
+        <StackPanel MinHeight="366" Height="435"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Orientation="Horizontal">
+                <materialDesign:Card Margin="5">
+                    <StackPanel MaxWidth="165"
+                     Margin="5"
+                      Orientation="Vertical"
+                        TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
+                        <StackPanel  Orientation="Horizontal">
+                            <TextBox
+                                
+                                MinWidth="100"
+                                                    HorizontalAlignment="Stretch"
+                                                    VerticalAlignment="Center"
+                                                    Margin=" 10 "
+                                                    materialDesign:HintAssist.Hint="Поиск"
+                                                    materialDesign:HintAssist.Foreground="Green"
+                                                    materialDesign:TextFieldAssist.UnderlineBrush="Green"
+                                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                                    Text="{Binding Name}" />
+                            <Button Command="{Binding FindSubstanceCommand}"
+                                
+                                                    Style="{StaticResource MaterialDesignToolButton}">
+                                <materialDesign:PackIcon
+                                                        Margin="8,0,8,0"
+                                                        Kind="Search"
+                                                        Opacity=".56" />
+                            </Button>
 
-            <Expander
-                ExpandDirection="Left">
-                <Expander.Header>
-                    <TextBlock
-                        RenderTransformOrigin=".5,.5"
-                        Text="Expander Example 4a">
-                        <TextBlock.LayoutTransform>
-                            <RotateTransform
-                                 Angle="90" />
-                        </TextBlock.LayoutTransform>
-                    </TextBlock>
-                </Expander.Header>
-                <StackPanel
-                  Margin="8,24,16,24"
-                  Orientation="Vertical"
-                    TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
-                    <TextBlock
-                        Text="Your Content" />
-                    <TextBlock />
-                </StackPanel>
-            </Expander>
-        </StackPanel>
-        <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
-            <ListBox ItemsSource="{Binding Materials}" x:Name="materialList"
-                                         Style="{StaticResource MaterialDesignCardsListBox}">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Viewbox>
-                            <Grid>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBox
-                                             MinWidth="100"
-                                             materialDesign:HintAssist.Hint="Название"
-                                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                             HorizontalContentAlignment="Center"
-                                             Margin="5,4,6,4"
-                                             VerticalAlignment="Center"
-                                             VerticalContentAlignment="Center"
-                                             Text="{Binding Name}" />
-                                    <TextBox
-                                             MinWidth="100"
-                                             materialDesign:HintAssist.Hint="Плотность"
-                                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                             HorizontalContentAlignment="Center"
-                                             Margin="5,4,6,4"
-                                             VerticalAlignment="Center"
-                                             VerticalContentAlignment="Center"
-                                             Text="{Binding Name}" />
-                                    <TextBox
+
+                        </StackPanel>
+                            <StackPanel  Orientation="Horizontal"
+                                                                    HorizontalAlignment="Left">
+                            <Label IsEnabled="{Binding DensityFilter}" >Плотность:</Label>
+                                <TextBox 
+                                    IsEnabled="{Binding DensityFilter }"
+                                     HorizontalAlignment="Right"
+                                                                Margin="2,0,10,0"
+                                                           
+                                                                materialDesign:HintAssist.Hint="Мин"
+                                                                materialDesign:HintAssist.IsFloating="True"
+                                                                Text="{Binding MinDensity}" />
+                                <TextBox
+                                    IsEnabled="{Binding DensityFilter }"
+                                     HorizontalAlignment="Right"
+                                                                Margin="0,0,10,0"
+                                                            
+                                                                materialDesign:HintAssist.Hint="Макс"
+                                                                materialDesign:HintAssist.IsFloating="True"
+                                                                Text="{Binding MaxDensity}" />
+
+                            <CheckBox IsChecked="{Binding DensityFilter }"></CheckBox>
+
+                            </StackPanel>
+                        <StackPanel Margin="5"  Orientation="Horizontal"
+                                         HorizontalAlignment="Left">
+                            <TextBlock IsEnabled="{Binding CalorificValueFilter }">
+                                    <Run Text="Теплота"/>
+                                    <LineBreak/>
+                                    <Run Text="Сгорания:"/> 
+                            </TextBlock>
+                            <TextBox IsEnabled="{Binding CalorificValueFilter }" HorizontalAlignment="Right"
+                                     Margin="10,0,10,0"
+                                
+                                     materialDesign:HintAssist.Hint="Мин"
+                                     materialDesign:HintAssist.IsFloating="True"
+                                     Text="{Binding MinCalorificValue}" />
+                            <TextBox IsEnabled="{Binding CalorificValueFilter }" HorizontalAlignment="Right"
+                                     Margin="0,0,10,0"
+                                 
+                                     materialDesign:HintAssist.Hint="Макс"
+                                     materialDesign:HintAssist.IsFloating="True"
+                                     Text="{Binding MaxCalorificValue}" />
+                            <CheckBox IsChecked="{Binding CalorificValueFilter}"></CheckBox>
+
+                        </StackPanel>
+                        <ComboBox Margin="5"
+    
+    Style="{StaticResource MaterialDesignOutlinedComboBox}"
+     SelectedIndex="0"
+     materialDesign:HintAssist.Hint="Тип"
+     materialDesign:HintAssist.IsFloating="True"
+     ItemsSource="{Binding SubstanceTypes, UpdateSourceTrigger=PropertyChanged}"
+     SelectedItem="{Binding SelectedSubstanceType}" />
+                    </StackPanel>
+                </materialDesign:Card>
+
+                <ScrollViewer HorizontalAlignment="Left" VerticalAlignment="Top"  HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+
+                    <ListBox ItemsSource="{Binding Substances}" x:Name="materialList"
+                                     Style="{StaticResource MaterialDesignCardsListBox}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Viewbox>
+                                    <Grid>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBox
+                                                IsReadOnly="True"
                                          MinWidth="100"
-                                         materialDesign:HintAssist.Hint="Теплота сгорания"
+                                         materialDesign:HintAssist.Hint="Название"
                                          Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                          HorizontalContentAlignment="Center"
                                          Margin="5,4,6,4"
                                          VerticalAlignment="Center"
                                          VerticalContentAlignment="Center"
                                          Text="{Binding Name}" />
-                                    <TextBox
-                                          MinWidth="100"
-                                          materialDesign:HintAssist.Hint="Qпдк"
-                                          Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                          HorizontalContentAlignment="Center"
-                                          Margin="5,4,6,4"
-                                          VerticalAlignment="Center"
-                                          VerticalContentAlignment="Center"
-                                          Text="{Binding Name}" />
-                                    <TextBox
-                                       MinWidth="100"
-                                       materialDesign:HintAssist.Hint="Qмдк"
-                                       Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                       HorizontalContentAlignment="Center"
-                                       Margin="5,4,6,4"
-                                       VerticalAlignment="Center"
-                                       VerticalContentAlignment="Center"
-                                       Text="{Binding Name}" />     
+                                            <TextBox
+                                                IsReadOnly="True"
+                                                
+                                         MinWidth="100"
+                                         materialDesign:HintAssist.Hint="Плотность"
+                                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                         HorizontalContentAlignment="Center"
+                                         Margin="5,4,6,4"
+                                         VerticalAlignment="Center"
+                                         VerticalContentAlignment="Center"
+                                         Text="{Binding Density}" />
+                                            <TextBox
+                                                IsReadOnly="True"
+                                                
+                                     MinWidth="100"
+                                     materialDesign:HintAssist.Hint="Теплота сгорания"
+                                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                     HorizontalContentAlignment="Center"
+                                     Margin="5,4,6,4"
+                                     VerticalAlignment="Center"
+                                     VerticalContentAlignment="Center"
+                                     Text="{Binding CalorificValue}" />
+                                            <TextBox
+                                                IsReadOnly="True"
+                                                
+                                      MinWidth="100"
+                                      materialDesign:HintAssist.Hint="Qпдк"
+                                      Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                      HorizontalContentAlignment="Center"
+                                      Margin="5,4,6,4"
+                                      VerticalAlignment="Center"
+                                      VerticalContentAlignment="Center"
+                                      Text="{Binding MinConcentration}" />
+                                            <TextBox
+                                                IsReadOnly="True"
+                                                
+                                   MinWidth="100"
+                                   materialDesign:HintAssist.Hint="Qмдк"
+                                   Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                   HorizontalContentAlignment="Center"
+                                   Margin="5,4,6,4"
+                                   VerticalAlignment="Center"
+                                   VerticalContentAlignment="Center"
+                                   Text="{Binding MaxConcentration}" />
+                                                    <TextBox
+                         IsReadOnly="True"
+             
+            MinWidth="100"
+            materialDesign:HintAssist.Hint="Qмдк"
+            Style="{StaticResource MaterialDesignOutlinedTextBox}"
+            HorizontalContentAlignment="Center"
+            Margin="5,4,6,4"
+            VerticalAlignment="Center"
+            VerticalContentAlignment="Center"
+            Text="{Binding MaxConcentration}" />
+                                            <TextBox
+             IsReadOnly="True"
+ 
+MinWidth="100"
+materialDesign:HintAssist.Hint="Тип"
+Style="{StaticResource MaterialDesignOutlinedTextBox}"
+HorizontalContentAlignment="Center"
+Margin="5,4,6,4"
+VerticalAlignment="Center"
+VerticalContentAlignment="Center"
+Text="{Binding SubstanceType.Name}" />
 
 
-                                    <Button
-                                                            Margin="3"
-                                                            VerticalAlignment="Center"
-                                                            Command="{Binding Path=DataContext.DeleteaMaterialCommand,
-                                                         RelativeSource={RelativeSource Mode=FindAncestor,
-                                                        AncestorType=Window}}"
-                                                            CommandParameter="{Binding }"
+
+                                            <Button
+                                                        Margin="3"
+                                                        VerticalAlignment="Center"
+                                                        Command="{Binding Path=DataContext.DeleteCommand,
+                                                     RelativeSource={RelativeSource Mode=FindAncestor,
+                                                    AncestorType=Window}}"
+                                                        CommandParameter="{Binding }"
 
 
-                                                            HorizontalAlignment="Right"
-                                                            Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
-                                                            ToolTip="MaterialDesignFloatingActionMiniLightButton">
-                                        <materialDesign:PackIcon
-                                                                Width="30"
-                                                                Height="30"
-                                                                Kind="Delete" />
-                                    </Button>
-                                </StackPanel>
+                                                        HorizontalAlignment="Right"
+                                                        Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                                                        ToolTip="MaterialDesignFloatingActionMiniLightButton">
+                                                <materialDesign:PackIcon
+                                                            Width="30"
+                                                            Height="30"
+                                                            Kind="Delete" />
+                                            </Button>
+                                        </StackPanel>
 
-                            </Grid>
-                        </Viewbox>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-        </ScrollViewer>
-        <Button
-                         Margin="3"
-                         VerticalAlignment="Bottom"
-                         Command="{Binding AddSubstanceCommand}"
-                         HorizontalAlignment="Right"
+                                    </Grid>
+                                </Viewbox>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
+
+                </ScrollViewer>
+            </StackPanel>
+        </Viewbox>
+        <Button 
+            Width="50"
+            Height="50"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+                         Margin="10"                      
+                         Command="{Binding AddSubstanceCommand}" 
                          Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
                          ToolTip="MaterialDesignFloatingActionMiniLightButton">
             <materialDesign:PackIcon
-                             Width="30"
-                             Height="30"
+                             Width="35"
+                             Height="35"
                              Kind="Plus" />
         </Button>
 
