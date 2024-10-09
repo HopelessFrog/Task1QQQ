@@ -29,25 +29,23 @@ namespace Task1QQQ.ViewModels
         [ObservableProperty]
         private string name;
 
-        [Range(-99.999, 99.999, ErrorMessage = "Значение должно быть в диапазоне от -99,999 до 99,999.")]
-        [RegularExpression(@"^\d{1,2}(\.\d{1,3})?$", ErrorMessage = "Значение должно содержать до 2 цифр до запятой и до 3 цифр после запятой.")]
+        [Range(0, 99.999, ErrorMessage = "Значение должно быть UNSIGNED DECIMAL(5,3)")]
         [NotifyDataErrorInfo]
         [ObservableProperty]
-        private double destiny;
+        private decimal destiny;
 
-        [Range(-99.999, 99.999, ErrorMessage = "Значение должно быть в диапазоне от -99,999 до 99,999.")]
-        [RegularExpression(@"^\d{1,2}(\.\d{1,3})?$", ErrorMessage = "Значение должно содержать до 2 цифр до запятой и до 3 цифр после запятой.")]
+        [Range(0, 99.999, ErrorMessage = "Значение должно быть UNSIGNED DECIMAL(5,3)")]
         [ObservableProperty]
-        private double calorificValue;
+        private decimal calorificValue;
 
         [ObservableProperty]
         [NotifyDataErrorInfo]
-        [Range(0, 255, ErrorMessage = "Value must be TINYINT")]
+        [Range(0, 255, ErrorMessage = "Значение должно быть UNSIGNED TINYINT")]
         private int minConcetration;
 
         [ObservableProperty]
         [NotifyDataErrorInfo]
-        [Range(0, 255, ErrorMessage = "Value must be TINYINT")]
+        [Range(0, 255, ErrorMessage = "Значение должно быть UNSIGNED TINYINT")]
         private int maxConcetration;
         public Action Close { get; set; }
 

@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
+using System.Windows;
 using Task1QQQ.Messages;
 using Task1QQQ.Models;
 using Task1QQQ.Views;
@@ -43,9 +44,9 @@ namespace Task1QQQ.ViewModels
         [ObservableProperty]
         private SubstanceType selectedSubstanceType;
         [ObservableProperty]
-        private bool densityFilter = true;
+        private bool densityFilter = false;
         [ObservableProperty]
-        private bool calorificValueFilter = true;
+        private bool calorificValueFilter = false;
 
 
         public MainViewModel()
@@ -72,9 +73,12 @@ namespace Task1QQQ.ViewModels
         [RelayCommand]
         private void Delete(Substance substance)
         {
-            _dbService.DeleteSubstance(substance.Id);
-            Substances = _dbService.FindSubstances(name, minDensity, maxDensity, minCalorificValue, maxCalorificValue, SelectedSubstanceType?.Id, densityFilter, calorificValueFilter);
-
+            var result = MessageBox.Show($"Удалить {substance.Name}? ", "", MessageBoxButton.OKCancel, MessageBoxImage.Question);
+            if (result == MessageBoxResult.OK)
+            {
+                _dbService.DeleteSubstance(substance.Id);
+                Substances = _dbService.FindSubstances(name, minDensity, maxDensity, minCalorificValue, maxCalorificValue, SelectedSubstanceType?.Id, densityFilter, calorificValueFilter);
+            }
         }
 
         [RelayCommand]

@@ -23,13 +23,13 @@ namespace Task1QQQ
 
                 if (!string.IsNullOrEmpty(name))
                     conditions.Add("s.name LIKE @name");
-                if (minDensity.HasValue && minDensity != 0 && density)
+                if (minDensity.HasValue && density)
                     conditions.Add("s.density >= @minDensity");
-                if (maxDensity.HasValue && maxDensity != 0 && density)
+                if (maxDensity.HasValue && density)
                     conditions.Add("s.density <= @maxDensity");
-                if (minCalorificValue.HasValue && minCalorificValue != 0 && calorific)
+                if (minCalorificValue.HasValue && calorific)
                     conditions.Add("s.calorific_value >= @minCalorificValue");
-                if (maxCalorificValue.HasValue && maxCalorificValue != 0 && calorific)
+                if (maxCalorificValue.HasValue && calorific)
                     conditions.Add("s.calorific_value <= @maxCalorificValue");
                 if (substanceTypeId.HasValue && substanceTypeId != 0)
                     conditions.Add("s.Substance_type_id = @substanceTypeId");
@@ -44,15 +44,15 @@ namespace Task1QQQ
 
                 cmd.CommandText = query;
 
-                if (!string.IsNullOrEmpty(name))
+                if (!string.IsNullOrWhiteSpace(name))
                     cmd.Parameters.AddWithValue("@name", $"%{name}%");
-                if (minDensity.HasValue && minDensity != 0 && density)
+                if (minDensity.HasValue && density)
                     cmd.Parameters.AddWithValue("@minDensity", minDensity);
-                if (maxDensity.HasValue && maxDensity != 0 && density)
+                if (maxDensity.HasValue && density)
                     cmd.Parameters.AddWithValue("@maxDensity", maxDensity);
-                if (minCalorificValue.HasValue && minCalorificValue != 0 && calorific)
+                if (minCalorificValue.HasValue && calorific)
                     cmd.Parameters.AddWithValue("@minCalorificValue", minCalorificValue);
-                if (maxCalorificValue.HasValue && maxCalorificValue != 0 && calorific)
+                if (maxCalorificValue.HasValue && calorific)
                     cmd.Parameters.AddWithValue("@maxCalorificValue", maxCalorificValue);
                 if (substanceTypeId.HasValue && substanceTypeId != 0)
                     cmd.Parameters.AddWithValue("@substanceTypeId", substanceTypeId);
@@ -117,7 +117,7 @@ namespace Task1QQQ
         }
 
 
-        public bool AddSubstance(string name, double density, double calorificValue, int minConcentration, int maxConcentration, int substanceTypeId)
+        public bool AddSubstance(string name, decimal density, decimal calorificValue, int minConcentration, int maxConcentration, int substanceTypeId)
         {
             using (MySqlConnection conn = new MySqlConnection(connectionString))
             {

@@ -7,56 +7,74 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         ResizeMode="NoResize"
         mc:Ignorable="d"
-        Title="AddSubstanceWindow" Height="560" Width="315">
+        Title="AddSubstanceWindow" Height="600" Width="315">
     <Grid>
-        <StackPanel Margin="3" Orientation="Vertical">
+        <StackPanel Margin="3,6" Orientation="Vertical">
             <TextBox
+           
              MinWidth="100"
              materialDesign:HintAssist.Hint="Название"
              Style="{StaticResource MaterialDesignOutlinedTextBox}"
              HorizontalContentAlignment="Center"
-             Margin="10"
+             Margin="10,15"
              VerticalAlignment="Center"
              VerticalContentAlignment="Center"
              Text="{Binding Name}" />
             <TextBox
+                 TextChanged ="TextBox_TextChanged"
+ PreviewTextInput ="TextBox_PreviewTextInput"
+                 MaxLength="6"
+ materialDesign:TextFieldAssist.CharacterCounterVisibility="Collapsed"
              MinWidth="100"
              materialDesign:HintAssist.Hint="Плотность"
              Style="{StaticResource MaterialDesignOutlinedTextBox}"
              HorizontalContentAlignment="Center"
-             Margin="10"
+              Margin="10,15"
              VerticalAlignment="Center"
              VerticalContentAlignment="Center"
              Text="{Binding Destiny}" />
             <TextBox
+                 TextChanged ="TextBox_TextChanged"
+ PreviewTextInput ="TextBox_PreviewTextInput"
+                 MaxLength="6"
+ materialDesign:TextFieldAssist.CharacterCounterVisibility="Collapsed"
              MinWidth="100"
              materialDesign:HintAssist.Hint="Теплота сгорания"
              Style="{StaticResource MaterialDesignOutlinedTextBox}"
              HorizontalContentAlignment="Center"
-             Margin="10"
+              Margin="10,15"
              VerticalAlignment="Center"
              VerticalContentAlignment="Center"
              Text="{Binding CalorificValue}" />
             <TextBox
+                 TextChanged ="TextBox_TextChanged"
+  PreviewTextInput ="TextBox_PreviewTextInput_1"
+
+                 MaxLength="3"
+ materialDesign:TextFieldAssist.CharacterCounterVisibility="Collapsed"
               MinWidth="100"
               materialDesign:HintAssist.Hint="Минимальная допустимая концетрация"
               Style="{StaticResource MaterialDesignOutlinedTextBox}"
               HorizontalContentAlignment="Center"
-              Margin="10"
+               Margin="10,15"
               VerticalAlignment="Center"
               VerticalContentAlignment="Center"
               Text="{Binding MinConcetration}" />
             <TextBox
+                 TextChanged ="TextBox_TextChanged"
+ PreviewTextInput ="TextBox_PreviewTextInput_1"
+                 MaxLength="3"
+ materialDesign:TextFieldAssist.CharacterCounterVisibility="Collapsed"
                MinWidth="100"
                materialDesign:HintAssist.Hint="Максимально допустимая концетрация"
                Style="{StaticResource MaterialDesignOutlinedTextBox}"
                HorizontalContentAlignment="Center"
-               Margin="10"
+                Margin="10,15"
                VerticalAlignment="Center"
                VerticalContentAlignment="Center"
                Text="{Binding MaxConcetration}" />
             <Grid >
-                <StackPanel  Margin="8"  Orientation="Horizontal">
+                <StackPanel  Margin="8,12"  Orientation="Horizontal">
                     <ComboBox 
                         x:Name="MyComboBox"
                         Style="{StaticResource MaterialDesignOutlinedComboBox}"
