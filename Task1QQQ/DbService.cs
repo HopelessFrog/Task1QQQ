@@ -189,5 +189,35 @@ namespace Task1QQQ
                 }
             }
         }
+
+        public bool UpdateSubstance(int id, string name, decimal density, decimal calorificValue, int minConcentration, int maxConcentration, int substanceTypeId)
+        {
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                conn.Open();
+
+                string query = @"UPDATE Substance 
+                         SET name = @name, 
+                             density = @density, 
+                             calorific_value = @calorificValue, 
+                             min_concentration = @minConcentration, 
+                             max_concentration = @maxConcentration, 
+                             Substance_type_id = @substanceTypeId 
+                         WHERE id_Substance = @id";
+
+                using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.Parameters.AddWithValue("@name", name);
+                    cmd.Parameters.AddWithValue("@density", density);
+                    cmd.Parameters.AddWithValue("@calorificValue", calorificValue);
+                    cmd.Parameters.AddWithValue("@minConcentration", minConcentration);
+                    cmd.Parameters.AddWithValue("@maxConcentration", maxConcentration);
+                    cmd.Parameters.AddWithValue("@substanceTypeId", substanceTypeId);
+
+                    return cmd.ExecuteNonQuery() > 0;
+                }
+            }
+        }
     }
 }

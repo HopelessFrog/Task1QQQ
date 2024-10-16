@@ -1,6 +1,7 @@
 ﻿using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
+using Task1QQQ.Models;
 using Task1QQQ.ViewModels;
 
 namespace Task1QQQ.Views
@@ -10,10 +11,11 @@ namespace Task1QQQ.Views
     /// </summary>
     public partial class AddSubstanceWindow : Window
     {
-        public AddSubstanceWindow()
+
+        public AddSubstanceWindow(Substance substance = null)
         {
             InitializeComponent();
-            DataContext = new AddSubstanceViewModel();
+            DataContext = new AddSubstanceViewModel(substance);
             Loaded += AddSubstanceWindow_Loaded;
         }
 

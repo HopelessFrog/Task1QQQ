@@ -1,109 +1,144 @@
-﻿<Window x:Class="Task1QQQ.Views.AddSubstanceWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Task1QQQ.Views"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        ResizeMode="NoResize"
-        mc:Ignorable="d"
-        Title="AddSubstanceWindow" Height="600" Width="315">
+﻿<Window
+    x:Class="Task1QQQ.Views.AddSubstanceWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:Task1QQQ.Views"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    ResizeMode="NoResize"
+    mc:Ignorable="d"
+    Title=""
+    Height="600"
+    Width="315">
     <Grid>
-        <StackPanel Margin="3,6" Orientation="Vertical">
+        <StackPanel
+            Margin="3,6"
+            Orientation="Vertical">
             <TextBox
-           
-             MinWidth="100"
-             materialDesign:HintAssist.Hint="Название"
-             Style="{StaticResource MaterialDesignOutlinedTextBox}"
-             HorizontalContentAlignment="Center"
-             Margin="10,15"
-             VerticalAlignment="Center"
-             VerticalContentAlignment="Center"
-             Text="{Binding Name}" />
-            <TextBox
-                 TextChanged ="TextBox_TextChanged"
- PreviewTextInput ="TextBox_PreviewTextInput"
-                 MaxLength="6"
- materialDesign:TextFieldAssist.CharacterCounterVisibility="Collapsed"
-             MinWidth="100"
-             materialDesign:HintAssist.Hint="Плотность"
-             Style="{StaticResource MaterialDesignOutlinedTextBox}"
-             HorizontalContentAlignment="Center"
-              Margin="10,15"
-             VerticalAlignment="Center"
-             VerticalContentAlignment="Center"
-             Text="{Binding Destiny}" />
-            <TextBox
-                 TextChanged ="TextBox_TextChanged"
- PreviewTextInput ="TextBox_PreviewTextInput"
-                 MaxLength="6"
- materialDesign:TextFieldAssist.CharacterCounterVisibility="Collapsed"
-             MinWidth="100"
-             materialDesign:HintAssist.Hint="Теплота сгорания"
-             Style="{StaticResource MaterialDesignOutlinedTextBox}"
-             HorizontalContentAlignment="Center"
-              Margin="10,15"
-             VerticalAlignment="Center"
-             VerticalContentAlignment="Center"
-             Text="{Binding CalorificValue}" />
-            <TextBox
-                 TextChanged ="TextBox_TextChanged"
-  PreviewTextInput ="TextBox_PreviewTextInput_1"
-
-                 MaxLength="3"
- materialDesign:TextFieldAssist.CharacterCounterVisibility="Collapsed"
-              MinWidth="100"
-              materialDesign:HintAssist.Hint="Минимальная допустимая концетрация"
-              Style="{StaticResource MaterialDesignOutlinedTextBox}"
-              HorizontalContentAlignment="Center"
-               Margin="10,15"
-              VerticalAlignment="Center"
-              VerticalContentAlignment="Center"
-              Text="{Binding MinConcetration}" />
-            <TextBox
-                 TextChanged ="TextBox_TextChanged"
- PreviewTextInput ="TextBox_PreviewTextInput_1"
-                 MaxLength="3"
- materialDesign:TextFieldAssist.CharacterCounterVisibility="Collapsed"
-               MinWidth="100"
-               materialDesign:HintAssist.Hint="Максимально допустимая концетрация"
-               Style="{StaticResource MaterialDesignOutlinedTextBox}"
-               HorizontalContentAlignment="Center"
+                materialDesign:HintAssist.Background="White"
+                MinWidth="100"
+                TextAlignment="Left"
+                materialDesign:HintAssist.Hint="Название"
+                Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                HorizontalContentAlignment="Center"
                 Margin="10,15"
-               VerticalAlignment="Center"
-               VerticalContentAlignment="Center"
-               Text="{Binding MaxConcetration}" />
-            <Grid >
-                <StackPanel  Margin="8,12"  Orientation="Horizontal">
-                    <ComboBox 
+                VerticalAlignment="Center"
+                VerticalContentAlignment="Center"
+                Text="{Binding Name}" />
+            <TextBox
+                TextAlignment="Left"
+                TextChanged="TextBox_TextChanged"
+                PreviewTextInput="TextBox_PreviewTextInput"
+                MaxLength="6"
+                materialDesign:TextFieldAssist.CharacterCounterVisibility="Collapsed"
+                materialDesign:TextFieldAssist.SuffixText="г/м³"
+                MinWidth="100"
+                materialDesign:HintAssist.Hint="Плотность"
+                materialDesign:HintAssist.Background="White"
+                Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                HorizontalContentAlignment="Center"
+                Margin="10,15"
+                VerticalAlignment="Center"
+                VerticalContentAlignment="Center"
+                Text="{Binding Density}" />
+            <TextBox
+                TextAlignment="Left"
+                materialDesign:TextFieldAssist.SuffixText="Дж/моль"
+                materialDesign:HintAssist.Background="White"
+                TextChanged="TextBox_TextChanged"
+                PreviewTextInput="TextBox_PreviewTextInput"
+                MaxLength="6"
+                materialDesign:TextFieldAssist.CharacterCounterVisibility="Collapsed"
+                MinWidth="100"
+                materialDesign:HintAssist.Hint="Теплота сгорания"
+                Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                HorizontalContentAlignment="Center"
+                Margin="10,15"
+                VerticalAlignment="Center"
+                VerticalContentAlignment="Center"
+                Text="{Binding CalorificValue}" />
+            <TextBox
+                TextAlignment="Left"
+                TextChanged="TextBox_TextChanged"
+                PreviewTextInput="TextBox_PreviewTextInput_1"
+                materialDesign:TextFieldAssist.SuffixText="%"
+                MaxLength="3"
+                materialDesign:TextFieldAssist.CharacterCounterVisibility="Collapsed"
+                MinWidth="100"
+                materialDesign:HintAssist.Hint="Минимальная допустимая концетрация"
+                materialDesign:HintAssist.IsFloating="True"
+                materialDesign:HintAssist.Background="White"
+                Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                HorizontalContentAlignment="Center"
+                Margin="10,15"
+                VerticalAlignment="Center"
+                VerticalContentAlignment="Center"
+                Text="{Binding MinConcetration}" />
+            <TextBox
+                materialDesign:HintAssist.Background="White"
+                TextAlignment="Left"
+                materialDesign:TextFieldAssist.SuffixText="%"
+                TextChanged="TextBox_TextChanged"
+                PreviewTextInput="TextBox_PreviewTextInput_1"
+                MaxLength="3"
+                materialDesign:TextFieldAssist.CharacterCounterVisibility="Collapsed"
+                MinWidth="100"
+                materialDesign:HintAssist.Hint="Максимально допустимая концетрация"
+                Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                HorizontalContentAlignment="Center"
+                Margin="10,15"
+                VerticalAlignment="Center"
+                VerticalContentAlignment="Center"
+                Text="{Binding MaxConcetration}" />
+            <Grid>
+                <StackPanel
+                    Margin="8,12"
+                    Orientation="Horizontal">
+                    <ComboBox
+                        materialDesign:HintAssist.Background="White"
                         x:Name="MyComboBox"
+                        Background="{x:Null}"
                         Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                         SelectedIndex="0"
-                         materialDesign:HintAssist.Hint="Тип"
-                         materialDesign:HintAssist.IsFloating="True"
-                         FontSize="20" Width="220" 
-                         ItemsSource="{Binding SubstanceTypes, UpdateSourceTrigger=PropertyChanged}"
-                         SelectedItem="{Binding SelectedSubstanceType}" />
+                        SelectedIndex="0"
+                        materialDesign:HintAssist.Hint="Тип"
+                        FontSize="20"
+                        Width="220"
+                        ItemsSource="{Binding SubstanceTypes, UpdateSourceTrigger=PropertyChanged}"
+                        SelectedItem="{Binding SelectedSubstanceType}" />
                     <Button
-                     Margin="10,0,0,0"
-                     Command="{Binding AddSubstanceTypeCommand}"
-  
-                     VerticalAlignment="Center"
-                     HorizontalAlignment="Center"       
-                     Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
-                     ToolTip="MaterialDesignFloatingActionMiniLightButton">
+                        Margin="10,0,0,0"
+                        Command="{Binding AddSubstanceTypeCommand}"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                        ToolTip="MaterialDesignFloatingActionMiniLightButton">
                         <materialDesign:PackIcon
-                         Width="30"
-                         Height="30"
-                         Kind="Plus" />
+                            Width="30"
+                            Height="30"
+                            Kind="Plus" />
                     </Button>
 
                 </StackPanel>
 
             </Grid>
-            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                <Button Command="{Binding CancelCommand}" Height="50" Width="120" Margin="10" Content="Отмена" Style="{StaticResource MaterialDesignFlatDarkBgButton}"></Button>
-                <Button Command="{Binding AddSubstanceCommand}" Height="50" Width="120" Margin="10" Content="Добавить" Style="{StaticResource MaterialDesignFlatLightBgButton}"></Button>
+            <StackPanel
+                HorizontalAlignment="Center"
+                Orientation="Horizontal">
+                <Button
+                    Command="{Binding CancelCommand}"
+                    Height="50"
+                    Width="120"
+                    Margin="10"
+                    Content="Отмена"
+                    Style="{StaticResource MaterialDesignFlatDarkBgButton}"></Button>
+                <Button
+                    Command="{Binding AddSubstanceCommand}"
+                    Height="50"
+                    Width="120"
+                    Margin="10"
+                    Content="Сохранить"
+                    Style="{StaticResource MaterialDesignFlatLightBgButton}"></Button>
             </StackPanel>
         </StackPanel>
     </Grid>

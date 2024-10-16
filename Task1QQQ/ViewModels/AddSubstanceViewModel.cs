@@ -12,6 +12,8 @@ namespace Task1QQQ.ViewModels
 {
     public partial class AddSubstanceViewModel : ObservableValidator, ICloseWindow
     {
+        private readonly Substance _substance;
+
         private DbService _dbService = new();
 
         [ObservableProperty]
@@ -32,7 +34,7 @@ namespace Task1QQQ.ViewModels
         [Range(0, 99.999, ErrorMessage = "Значение должно быть UNSIGNED DECIMAL(5,3)")]
         [NotifyDataErrorInfo]
         [ObservableProperty]
-        private decimal destiny;
+        private decimal density;
 
         [Range(0, 99.999, ErrorMessage = "Значение должно быть UNSIGNED DECIMAL(5,3)")]
         [ObservableProperty]
@@ -49,13 +51,25 @@ namespace Task1QQQ.ViewModels
         private int maxConcetration;
         public Action Close { get; set; }
 
-        public AddSubstanceViewModel()
+        public AddSubstanceViewModel(Substance substance = null)
         {
             SubstanceTypes = _dbService.GetSubstanceTypes();
             WeakReferenceMessenger.Default.Register<SubstanceTypeCreatedMessage>(this, (r, m) =>
             {
                 SubstanceTypes = m.Value;
             });
+
+            _substance = substance;
+
+            if (_substance != null)
+            {
+                SelectedSubstanceType = _substance.SubstanceType;
+                Name = _substance.Name;
+                Density = _substance.Density;
+                CalorificValue = _substance.CalorificValue;
+                MinConcetration = _substance.MinConcentration;
+                MaxConcetration = _substance.MaxConcentration;
+            }
         }
 
         public bool CanClose()
@@ -79,25 +93,52 @@ namespace Task1QQQ.ViewModels
             {
                 return;
             }
-            try
+            if (_substance is null)
             {
-                _dbService.AddSubstance(name, Destiny, CalorificValue, minConcetration, maxConcetration, SelectedSubstanceType.Id);
-                MessageBox.Show("Вещество добавлено");
-                WeakReferenceMessenger.Default.Send(new SubstanceCreatedMessage(_dbService.FindSubstances()));
-
-                Close?.Invoke();
-
-            }
-            catch (MySqlException ex)
-            {
-                if (ex.Number == 1062)
+                try
                 {
-                    MessageBox.Show("Тип вещества c таким именем уже существует");
+                    _dbService.AddSubstance(name, Density, CalorificValue, minConcetration, maxConcetration, SelectedSubstanceType.Id);
+                    MessageBox.Show("Вещество добавлено");
+                    WeakReferenceMessenger.Default.Send(new SubstanceCreatedMessage(_dbService.FindSubstances()));
+
+                    Close?.Invoke();
+
                 }
+                catch (MySqlException ex)
+                {
+                    if (ex.Number == 1062)
+                    {
+                        MessageBox.Show("Тип вещества c таким именем уже существует");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Неизвестная ошибка");
+                }
+
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Неизвестная ошибка");
+                try
+                {
+                    _dbService.UpdateSubstance(_substance.Id, name, Density, CalorificValue, minConcetration, maxConcetration, SelectedSubstanceType.Id);
+                    MessageBox.Show("Вещество изменено");
+                    WeakReferenceMessenger.Default.Send(new SubstanceCreatedMessage(_dbService.FindSubstances()));
+
+                    Close?.Invoke();
+
+                }
+                catch (MySqlException ex)
+                {
+                    if (ex.Number == 1062)
+                    {
+                        MessageBox.Show("Тип вещества c таким именем уже существует");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Неизвестная ошибка");
+                }
             }
 
         }
