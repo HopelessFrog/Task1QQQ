@@ -1,4 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
+using System.Windows;
 using Task1QQQ.Models;
 
 namespace Task1QQQ
@@ -15,7 +16,15 @@ namespace Task1QQQ
 
             using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
-                conn.Open();
+                try
+                {
+                    conn.Open();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Невозможно подключится к бд");
+                    return new();
+                }
                 MySqlCommand cmd = conn.CreateCommand();
 
 
@@ -93,7 +102,14 @@ namespace Task1QQQ
 
             using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
-                conn.Open();
+                try
+                {
+                    conn.Open();
+                }
+                catch (Exception ex)
+                {
+                    return new();
+                }
 
                 string query = "SELECT * FROM Substance_type";
 
@@ -121,7 +137,14 @@ namespace Task1QQQ
         {
             using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
-                conn.Open();
+                try
+                {
+                    conn.Open();
+                }
+                catch (Exception ex)
+                {
+                    return false;
+                }
 
                 string query = @"INSERT INTO Substance (name, density, calorific_value, min_concentration, max_concentration, Substance_type_id)
                              VALUES (@name, @density, @calorificValue, @minConcentration, @maxConcentration, @substanceTypeId)";
@@ -144,7 +167,14 @@ namespace Task1QQQ
         {
             using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
-                conn.Open();
+                try
+                {
+                    conn.Open();
+                }
+                catch (Exception ex)
+                {
+                    return false;
+                }
 
                 string query = "INSERT INTO Substance_type (s_t_name) VALUES (@name)";
 
@@ -160,7 +190,14 @@ namespace Task1QQQ
         {
             using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
-                conn.Open();
+                try
+                {
+                    conn.Open();
+                }
+                catch (Exception ex)
+                {
+                    return false;
+                }
 
                 string query = "DELETE FROM Substance WHERE id_Substance = @id";
 
@@ -177,7 +214,14 @@ namespace Task1QQQ
         {
             using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
-                conn.Open();
+                try
+                {
+                    conn.Open();
+                }
+                catch (Exception ex)
+                {
+                    return false;
+                }
 
                 string query = "DELETE FROM Substance_type WHERE id_Substance_type = @id";
 
@@ -194,7 +238,14 @@ namespace Task1QQQ
         {
             using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
-                conn.Open();
+                try
+                {
+                    conn.Open();
+                }
+                catch (Exception ex)
+                {
+                    return false;
+                }
 
                 string query = @"UPDATE Substance 
                          SET name = @name, 
