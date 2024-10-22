@@ -12,7 +12,7 @@ namespace Task1QQQ.ViewModels
     {
         private DbService _dbService = new();
 
-        [MinLength(5, ErrorMessage = "Имя дожно ыбть длиннее 5")]
+        [MinLength(5, ErrorMessage = "Имя дожно быть длиннее 5")]
         [MaxLength(45, ErrorMessage = "Имя должно быть короче 45")]
         [NotifyDataErrorInfo]
         [ObservableProperty]
