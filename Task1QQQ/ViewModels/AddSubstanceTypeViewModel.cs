@@ -17,6 +17,7 @@ namespace Task1QQQ.ViewModels
         [NotifyDataErrorInfo]
         [ObservableProperty]
         private string name;
+
         public Action Close { get; set; }
 
         public bool CanClose()
@@ -31,6 +32,7 @@ namespace Task1QQQ.ViewModels
             {
                 return;
             }
+
             try
             {
                 _dbService.AddSubstanceType(name);
@@ -38,7 +40,6 @@ namespace Task1QQQ.ViewModels
                 WeakReferenceMessenger.Default.Send(new SubstanceTypeCreatedMessage(_dbService.GetSubstanceTypes()));
 
                 Close?.Invoke();
-
             }
             catch (MySqlException ex)
             {
@@ -51,7 +52,6 @@ namespace Task1QQQ.ViewModels
             {
                 MessageBox.Show("Неизвестная ошибка");
             }
-
         }
 
         [RelayCommand]

@@ -19,7 +19,7 @@
             x:Key="EnumDescriptionConverter" />
 
         <BlurEffect
-            
+
             KernelType="Gaussian"
             x:Key="BlurEffect" />
     </Window.Resources>
@@ -70,7 +70,7 @@
 
                             </StackPanel>
                             <StackPanel
-                                
+
                                 Margin="0,10"
                                 Orientation="Horizontal"
                                 HorizontalAlignment="Left">
@@ -98,7 +98,7 @@
                                 </StackPanel.Style>
                                 <Label>Плотность:</Label>
                                 <TextBox
-                                    TextChanged="TextBox_TextChanged"
+                                    LostFocus="UIElement_OnLostFocus"
                                     PreviewTextInput="TextBox_PreviewTextInput"
                                     MaxLength="6"
                                     materialDesign:TextFieldAssist.CharacterCounterVisibility="Collapsed"
@@ -110,7 +110,7 @@
                                     Text="{Binding MinDensity}" />
                                 <TextBox
                                     materialDesign:HintAssist.Background="White"
-                                    TextChanged="TextBox_TextChanged"
+                                    LostFocus="UIElement_OnLostFocus"
                                     PreviewTextInput="TextBox_PreviewTextInput"
                                     materialDesign:TextFieldAssist.SuffixText="г/м³"
                                     MaxLength="6"
@@ -122,7 +122,8 @@
                                     Text="{Binding MaxDensity}" />
 
                                 <CheckBox
-                                    IsChecked="{Binding DensityFilter }"></CheckBox>
+                                    IsChecked="{Binding DensityFilter }">
+                                </CheckBox>
 
                             </StackPanel>
                             <StackPanel
@@ -161,7 +162,7 @@
                                 <TextBox
                                     materialDesign:HintAssist.Background="White"
                                     materialDesign:TextFieldAssist.SuffixText="Дж/моль"
-                                    TextChanged="TextBox_TextChanged"
+                                    LostFocus="UIElement_OnLostFocus"
                                     PreviewTextInput="TextBox_PreviewTextInput"
                                     MaxLength="6"
                                     materialDesign:TextFieldAssist.CharacterCounterVisibility="Collapsed"
@@ -173,7 +174,7 @@
                                 <TextBox
                                     materialDesign:HintAssist.Background="White"
                                     materialDesign:TextFieldAssist.SuffixText="Дж/моль"
-                                    TextChanged="TextBox_TextChanged"
+                                    LostFocus="UIElement_OnLostFocus"
                                     MaxLength="6"
                                     materialDesign:TextFieldAssist.CharacterCounterVisibility="Collapsed"
                                     HorizontalAlignment="Right"
@@ -182,7 +183,8 @@
                                     materialDesign:HintAssist.IsFloating="True"
                                     Text="{Binding MaxCalorificValue}" />
                                 <CheckBox
-                                    IsChecked="{Binding CalorificValueFilter}"></CheckBox>
+                                    IsChecked="{Binding CalorificValueFilter}">
+                                </CheckBox>
 
                             </StackPanel>
                             <ComboBox
@@ -435,15 +437,15 @@
                                                 </GroupBox.Header>
                                                 <TextBlock
                                                     TextAlignment="Center">
-                                                                     <Run
+                                                    <Run
                                                         Text="{Binding MinConcentration}" />
-                                                                      <Run
+                                                    <Run
                                                         Text="%" />
-                                                                     <Run
+                                                    <Run
                                                         Text="-" />
-                                                                     <Run
+                                                    <Run
                                                         Text="{Binding MaxConcentration}" />
-                                                                     <Run
+                                                    <Run
                                                         Text="%" />
                                                 </TextBlock>
 

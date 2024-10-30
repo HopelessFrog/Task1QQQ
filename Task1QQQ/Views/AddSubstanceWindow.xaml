@@ -20,7 +20,7 @@
                 MinWidth="100"
                 TextAlignment="Left"
                 materialDesign:HintAssist.Hint="Название"
-                Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                 HorizontalContentAlignment="Center"
                 Margin="10,15"
                 VerticalAlignment="Center"
@@ -28,7 +28,7 @@
                 Text="{Binding Name}" />
             <TextBox
                 TextAlignment="Left"
-                TextChanged="TextBox_TextChanged"
+                LostFocus="UIElement_OnLostFocus"
                 PreviewTextInput="TextBox_PreviewTextInput"
                 MaxLength="6"
                 materialDesign:TextFieldAssist.CharacterCounterVisibility="Collapsed"
@@ -46,7 +46,7 @@
                 TextAlignment="Left"
                 materialDesign:TextFieldAssist.SuffixText="Дж/моль"
                 materialDesign:HintAssist.Background="White"
-                TextChanged="TextBox_TextChanged"
+                LostFocus="UIElement_OnLostFocus"
                 PreviewTextInput="TextBox_PreviewTextInput"
                 MaxLength="6"
                 materialDesign:TextFieldAssist.CharacterCounterVisibility="Collapsed"
@@ -60,7 +60,7 @@
                 Text="{Binding CalorificValue}" />
             <TextBox
                 TextAlignment="Left"
-                TextChanged="TextBox_TextChanged"
+                LostFocus="UIElement_OnLostFocus"
                 PreviewTextInput="TextBox_PreviewTextInput_1"
                 materialDesign:TextFieldAssist.SuffixText="%"
                 MaxLength="3"
@@ -79,7 +79,7 @@
                 materialDesign:HintAssist.Background="White"
                 TextAlignment="Left"
                 materialDesign:TextFieldAssist.SuffixText="%"
-                TextChanged="TextBox_TextChanged"
+                LostFocus="UIElement_OnLostFocus"
                 PreviewTextInput="TextBox_PreviewTextInput_1"
                 MaxLength="3"
                 materialDesign:TextFieldAssist.CharacterCounterVisibility="Collapsed"

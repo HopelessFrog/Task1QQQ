@@ -30,16 +30,7 @@ namespace Task1QQQ.Views
             }
         }
 
-        private void TextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
-        {
-            TextBox textBox = sender as TextBox;
-
-            if (string.IsNullOrWhiteSpace(textBox.Text))
-            {
-                textBox.Text = "0";
-                textBox.SelectionStart = 1;
-            }
-        }
+        
 
         private void TextBox_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
         {
@@ -65,6 +56,17 @@ namespace Task1QQQ.Views
             if (regex.IsMatch(e.Text))
             {
                 e.Handled = true;
+            }
+        }
+
+        private void UIElement_OnLostFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+
+            if (string.IsNullOrWhiteSpace(textBox.Text))
+            {
+                textBox.Text = "0";
+                textBox.SelectionStart = 1;
             }
         }
     }

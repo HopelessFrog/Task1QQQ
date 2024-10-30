@@ -34,7 +34,8 @@ namespace Task1QQQ
 
         }
 
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+
+        private void UIElement_OnLostFocus(object sender, RoutedEventArgs e)
         {
             TextBox textBox = sender as TextBox;
 
@@ -45,7 +46,5 @@ namespace Task1QQQ
 
             }
         }
-
-
     }
 }
