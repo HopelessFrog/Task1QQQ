@@ -1,20 +1,25 @@
 ﻿using MySql.Data.MySqlClient;
 using System.Windows;
+using Microsoft.Extensions.Configuration;
 using Task1QQQ.Models;
 
 namespace Task1QQQ
 {
     public class DbService
     {
-        private string connectionString = "server=localhost;user=root;database=mydb;port=3506;password=12345678";
+        private string _connectionString = "";
 
+        public DbService()
+        {
+            _connectionString = new ConfigurationBuilder().AddJsonFile("connection.json").Build().GetSection("connection")["string"];
+        }
         public List<Substance> FindSubstances(string name = null, decimal? minDensity = null, decimal? maxDensity = null,
                                            decimal? minCalorificValue = null, decimal? maxCalorificValue = null,
                                            int? substanceTypeId = null, bool density = false, bool calorific = false)
         {
             List<Substance> substances = new List<Substance>();
 
-            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            using (MySqlConnection conn = new MySqlConnection(_connectionString))
             {
                 try
                 {
@@ -100,7 +105,7 @@ namespace Task1QQQ
         {
             List<SubstanceType> substanceTypes = new List<SubstanceType>();
 
-            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            using (MySqlConnection conn = new MySqlConnection(_connectionString))
             {
                 try
                 {
@@ -135,7 +140,7 @@ namespace Task1QQQ
 
         public bool AddSubstance(string name, decimal density, decimal calorificValue, int minConcentration, int maxConcentration, int substanceTypeId)
         {
-            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            using (MySqlConnection conn = new MySqlConnection(_connectionString))
             {
                 try
                 {
@@ -165,7 +170,7 @@ namespace Task1QQQ
 
         public bool AddSubstanceType(string name)
         {
-            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            using (MySqlConnection conn = new MySqlConnection(_connectionString))
             {
                 try
                 {
@@ -188,7 +193,7 @@ namespace Task1QQQ
         }
         public bool DeleteSubstance(int id)
         {
-            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            using (MySqlConnection conn = new MySqlConnection(_connectionString))
             {
                 try
                 {
@@ -212,7 +217,7 @@ namespace Task1QQQ
 
         public bool DeleteSubstanceType(int id)
         {
-            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            using (MySqlConnection conn = new MySqlConnection(_connectionString))
             {
                 try
                 {
@@ -236,7 +241,7 @@ namespace Task1QQQ
 
         public bool UpdateSubstance(int id, string name, decimal density, decimal calorificValue, int minConcentration, int maxConcentration, int substanceTypeId)
         {
-            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            using (MySqlConnection conn = new MySqlConnection(_connectionString))
             {
                 try
                 {
