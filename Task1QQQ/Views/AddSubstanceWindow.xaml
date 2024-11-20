@@ -17,6 +17,7 @@
             Orientation="Vertical">
             <TextBox
                 materialDesign:HintAssist.Background="White"
+                materialDesign:HintAssist.HintPaddingBrush="White"
                 MinWidth="100"
                 TextAlignment="Left"
                 materialDesign:HintAssist.Hint="Название"
@@ -36,6 +37,7 @@
                 MinWidth="100"
                 materialDesign:HintAssist.Hint="Плотность"
                 materialDesign:HintAssist.Background="White"
+                materialDesign:HintAssist.HintPaddingBrush="White"
                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
                 HorizontalContentAlignment="Center"
                 Margin="10,15"
@@ -46,6 +48,7 @@
                 TextAlignment="Left"
                 materialDesign:TextFieldAssist.SuffixText="Дж/моль"
                 materialDesign:HintAssist.Background="White"
+                materialDesign:HintAssist.HintPaddingBrush="White"
                 LostFocus="UIElement_OnLostFocus"
                 PreviewTextInput="TextBox_PreviewTextInput"
                 MaxLength="6"
@@ -69,6 +72,7 @@
                 materialDesign:HintAssist.Hint="Минимальная допустимая концетрация"
                 materialDesign:HintAssist.IsFloating="True"
                 materialDesign:HintAssist.Background="White"
+                materialDesign:HintAssist.HintPaddingBrush="White"
                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
                 HorizontalContentAlignment="Center"
                 Margin="10,15"
@@ -77,6 +81,7 @@
                 Text="{Binding MinConcetration}" />
             <TextBox
                 materialDesign:HintAssist.Background="White"
+                materialDesign:HintAssist.HintPaddingBrush="White"
                 TextAlignment="Left"
                 materialDesign:TextFieldAssist.SuffixText="%"
                 LostFocus="UIElement_OnLostFocus"
@@ -97,6 +102,7 @@
                     Orientation="Horizontal">
                     <ComboBox
                         materialDesign:HintAssist.Background="White"
+                        materialDesign:HintAssist.HintPaddingBrush="White"
                         x:Name="MyComboBox"
                         Background="{x:Null}"
                         Style="{StaticResource MaterialDesignOutlinedComboBox}"
@@ -111,8 +117,7 @@
                         Command="{Binding AddSubstanceTypeCommand}"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center"
-                        Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
-                        ToolTip="MaterialDesignFloatingActionMiniLightButton">
+                        Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}">
                         <materialDesign:PackIcon
                             Width="30"
                             Height="30"

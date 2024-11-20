@@ -11,64 +11,12 @@
             <ResourceDictionary.MergedDictionaries>
                 <materialDesign:BundledTheme
                     BaseTheme="Light"
-                    PrimaryColor="DeepPurple"
-                    SecondaryColor="Lime" />
+                    PrimaryColor="Grey"
+                    SecondaryColor="Red" />
                 <ResourceDictionary
                     Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesign3.Defaults.xaml" />
-
-                <!-- material design styles -->
-                <ResourceDictionary
-                    Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/Generic.xaml" />
                 <ResourceDictionary
                     Source="pack://application:,,,/MaterialDesignExtensions;component/Themes/Generic.xaml" />
-                <ResourceDictionary
-                    Source="pack://application:,,,/MaterialDesignExtensions;component/Themes/MaterialDesignLightTheme.xaml" />
-                <!--<ResourceDictionary Source="pack://application:,,,/MaterialDesignExtensions;component/Themes/MaterialDesignDarkTheme.xaml" />-->
-
-                <!-- primary colors -->
-                <ResourceDictionary>
-                    <ResourceDictionary.MergedDictionaries>
-                        <ResourceDictionary
-                            Source="pack://application:,,,/MaterialDesignColors;component/Themes/MaterialDesignColor.Blue.xaml" />
-                    </ResourceDictionary.MergedDictionaries>
-                    <SolidColorBrush
-                        x:Key="PrimaryHueLightBrush"
-                        Color="GreenYellow " />
-                    <SolidColorBrush
-                        x:Key="PrimaryHueLightForegroundBrush"
-                        Color="Yellow" />
-                    <SolidColorBrush
-                        x:Key="PrimaryHueMidBrush"
-                        Color="DarkGray" />
-                    <SolidColorBrush
-                        x:Key="PrimaryHueMidForegroundBrush"
-                        Color="DarkSlateGray" />
-                    <SolidColorBrush
-                        x:Key="PrimaryHueDarkBrush"
-                        Color="Red" />
-                    <SolidColorBrush
-                        x:Key="PrimaryHueDarkForegroundBrush"
-                        Color="GreenYellow" />
-                </ResourceDictionary>
-
-                <!-- accent color -->
-                <ResourceDictionary>
-                    <ResourceDictionary.MergedDictionaries>
-                        <ResourceDictionary
-                            Source="pack://application:,,,/MaterialDesignColors;component/Themes/MaterialDesignColor.Lime.xaml" />
-                    </ResourceDictionary.MergedDictionaries>
-                    <SolidColorBrush
-                        x:Key="SecondaryHueMidBrush"
-                        Color="Gray" />
-                    <SolidColorBrush
-                        x:Key="SecondaryHueMidForegroundBrush"
-                        Color="Yellow" />
-                </ResourceDictionary>
-
-                <!--<ResourceDictionary>
-             <SolidColorBrush x:Key="MaterialDesignBackground" Color="{Binding Color, Source={StaticResource MaterialDesignPaper}}" />
-         </ResourceDictionary>-->
-
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

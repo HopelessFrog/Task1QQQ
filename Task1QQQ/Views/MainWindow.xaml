@@ -18,7 +18,6 @@
             x:Key="EnumDescriptionConverter" />
 
         <BlurEffect
-
             KernelType="Gaussian"
             x:Key="BlurEffect" />
     </Window.Resources>
@@ -69,7 +68,6 @@
 
                             </StackPanel>
                             <StackPanel
-
                                 Margin="0,10"
                                 Orientation="Horizontal"
                                 HorizontalAlignment="Left">
@@ -97,6 +95,8 @@
                                 </StackPanel.Style>
                                 <Label>Плотность:</Label>
                                 <TextBox
+                                    materialDesign:HintAssist.Background="White"
+                                    materialDesign:HintAssist.HintPaddingBrush="White"
                                     LostFocus="UIElement_OnLostFocus"
                                     PreviewTextInput="TextBox_PreviewTextInput"
                                     MaxLength="6"
@@ -109,6 +109,7 @@
                                     Text="{Binding MinDensity}" />
                                 <TextBox
                                     materialDesign:HintAssist.Background="White"
+                                    materialDesign:HintAssist.HintPaddingBrush="White"
                                     LostFocus="UIElement_OnLostFocus"
                                     PreviewTextInput="TextBox_PreviewTextInput"
                                     materialDesign:TextFieldAssist.SuffixText="г/м³"
@@ -160,6 +161,7 @@
                                 </TextBlock>
                                 <TextBox
                                     materialDesign:HintAssist.Background="White"
+                                    materialDesign:HintAssist.HintPaddingBrush="White"
                                     materialDesign:TextFieldAssist.SuffixText="Дж/моль"
                                     LostFocus="UIElement_OnLostFocus"
                                     PreviewTextInput="TextBox_PreviewTextInput"
@@ -172,6 +174,7 @@
                                     Text="{Binding MinCalorificValue}" />
                                 <TextBox
                                     materialDesign:HintAssist.Background="White"
+                                    materialDesign:HintAssist.HintPaddingBrush="White"
                                     materialDesign:TextFieldAssist.SuffixText="Дж/моль"
                                     LostFocus="UIElement_OnLostFocus"
                                     MaxLength="6"
@@ -189,9 +192,9 @@
                             <ComboBox
                                 SelectedIndex="0"
                                 materialDesign:HintAssist.Background="White"
+                                materialDesign:HintAssist.HintPaddingBrush="White"
                                 Margin="5,10"
                                 Style="{StaticResource MaterialDesignOutlinedComboBox}"
-
                                 materialDesign:HintAssist.Hint="Тип"
                                 materialDesign:HintAssist.IsFloating="True"
                                 ItemsSource="{Binding SubstanceTypes, UpdateSourceTrigger=PropertyChanged}"
@@ -229,6 +232,7 @@
                                 HorizontalAlignment="Stretch"
                                 Margin="15,4,10,4"
                                 materialDesign:HintAssist.Background="White"
+                                materialDesign:HintAssist.HintPaddingBrush="White"
                                 x:Name="MyComboBox"
                                 Background="{x:Null}"
                                 Style="{StaticResource MaterialDesignOutlinedComboBox}"
@@ -258,8 +262,7 @@
                                     IsChecked="{Binding Or}"
                                     materialDesign:ToggleButtonAssist.OnContent="{materialDesign:PackIcon Kind=ArrowUp}"
                                     Content="{materialDesign:PackIcon Kind=ArrowDown}"
-                                    Style="{StaticResource MaterialDesignActionToggleButton}"
-                                    ToolTip="MaterialDesignActionLightToggleButton">
+                                    Style="{StaticResource MaterialDesignActionToggleButton}">
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger
                                             EventName="Checked">
@@ -475,8 +478,7 @@
                                                     AncestorType=Window}}"
                                                     CommandParameter="{Binding }"
                                                     HorizontalAlignment="Right"
-                                                    Style="{StaticResource MaterialDesignFloatingActionDarkButton}"
-                                                    ToolTip="MaterialDesignFloatingActionMiniLightButton">
+                                                    Style="{StaticResource MaterialDesignFloatingActionDarkButton}">
                                                     <materialDesign:PackIcon
                                                         Width="30"
                                                         Height="30"
@@ -502,8 +504,7 @@
             VerticalAlignment="Bottom"
             Margin="15,15"
             Command="{Binding AddSubstanceCommand}"
-            Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
-            ToolTip="MaterialDesignFloatingActionMiniLightButton">
+            Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}">
             <materialDesign:PackIcon
                 Width="40"
                 Height="40"

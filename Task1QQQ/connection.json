@@ -1,5 +1,5 @@
 ﻿{
   "connection": {
-    "string": "Server=192.168.50.21:3306;Database=myDataBase;Uid=myUsername;Pwd=myPassword;"
+    "string": "Server=localhost:3506;Database=mydb;Uid=root;Pwd=12345678;"
   }
 }
