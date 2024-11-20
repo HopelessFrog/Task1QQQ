@@ -9,7 +9,6 @@
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     mc:Ignorable="d"
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-    xmlns:mde="clr-namespace:MaterialDesignExtensions.Controls;assembly=MaterialDesignExtensions"
     WindowState="Maximized"
     Title=""
     Height="540"

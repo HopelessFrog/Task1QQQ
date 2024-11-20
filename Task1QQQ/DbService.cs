@@ -11,7 +11,7 @@ namespace Task1QQQ
 
         public DbService()
         {
-            _connectionString = new ConfigurationBuilder().AddJsonFile("connection.json").Build().GetSection("connection")["string"];
+           _connectionString = new ConfigurationBuilder().AddJsonFile("connection.json").Build().GetSection("connection")["string"];
         }
         public List<Substance> FindSubstances(string name = null, decimal? minDensity = null, decimal? maxDensity = null,
                                            decimal? minCalorificValue = null, decimal? maxCalorificValue = null,
